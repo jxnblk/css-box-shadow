@@ -1,10 +1,12 @@
 const VALUES_REG = /,(?![^\(]*\))/
 const PARTS_REG = /\s(?![^(]*\))/
+const LENGTH_REG = /^[0-9]+[a-zA-Z%]+$/
 
 const parseValue = str => {
   const parts = str.split(PARTS_REG)
   const inset = parts.includes('inset')
-  const color = parts.slice(-1)[0]
+  const last = parts.slice(-1)[0]
+  const color = !isLength(last) ? last : undefined
 
   const nums = parts
     .filter(n => n !== 'inset')
@@ -45,6 +47,7 @@ const stringifyValue = obj => {
     .join(' ')
 }
 
+const isLength = v => LENGTH_REG.test(v)
 const toNum = v => {
   if (!/px$/.test(v) && v !== '0') return v
   const n = parseFloat(v)
