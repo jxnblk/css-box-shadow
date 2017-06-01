@@ -143,6 +143,32 @@ test('stringify converts numbers to pixels', t => {
   t.is(str, '4px 8px 0 tomato')
 })
 
+test('stringify handles partial values', t => {
+  const a = stringify([
+    {
+      spreadRadius: 4,
+      color: 'tomato'
+    }
+  ])
+  const b = stringify([
+    {
+      offsetY: 4,
+      spreadRadius: 4,
+      color: 'tomato'
+    }
+  ])
+  const c = stringify([
+    {
+      offsetX: 4,
+      blurRadius: 3,
+      color: 'tomato'
+    }
+  ])
+  t.is(a, '0 0 0 4px tomato')
+  t.is(b, '0 4px 0 4px tomato')
+  t.is(c, '4px 0 3px tomato')
+})
+
 test('works both ways', t => {
   const str = '0 0 0 32px tomato'
   const arr = parse(str)

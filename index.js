@@ -25,9 +25,9 @@ const parseValue = str => {
 const stringifyValue = obj => {
   const {
     inset,
-    offsetX,
-    offsetY,
-    blurRadius,
+    offsetX = 0,
+    offsetY = 0,
+    blurRadius = 0,
     spreadRadius,
     color
   } = obj || {}
@@ -36,7 +36,7 @@ const stringifyValue = obj => {
     (inset ? 'inset' : null),
     offsetX,
     offsetY,
-    blurRadius,
+    blurRadius ,
     spreadRadius,
     color
   ].filter(v => v !== null && v !== undefined)
