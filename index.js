@@ -1,6 +1,6 @@
 const VALUES_REG = /,(?![^\(]*\))/
 const PARTS_REG = /\s(?![^(]*\))/
-const LENGTH_REG = /^[0-9]+[a-zA-Z%]+$/
+const LENGTH_REG = /^[0-9]+[a-zA-Z%]+?$/
 
 const parseValue = str => {
   const parts = str.split(PARTS_REG)
@@ -47,7 +47,7 @@ const stringifyValue = obj => {
     .join(' ')
 }
 
-const isLength = v => LENGTH_REG.test(v)
+const isLength = v => v === '0' || LENGTH_REG.test(v)
 const toNum = v => {
   if (!/px$/.test(v) && v !== '0') return v
   const n = parseFloat(v)
