@@ -93,6 +93,15 @@ test('parse does not convert em values to numbers', t => {
   t.is(obj.blurRadius, '1em')
 })
 
+test.only('parse properly handles zero values', t => {
+  const [ obj ] = parse('0 0 0 4px tomato')
+  t.is(obj.offsetX, 0)
+  t.is(obj.offsetY, 0)
+  t.is(obj.blurRadius, 0)
+  t.is(obj.spreadRadius, 4)
+  t.is(obj.color, 'tomato')
+})
+
 test('stringify returns a string', t => {
   const str = stringify([])
   t.is(typeof str, 'string')
